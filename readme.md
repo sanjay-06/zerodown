@@ -1,6 +1,5 @@
 
 ## Question 3 : US housing market dynamics
-<hr>
 <br>
 The project is done with following technologies
 
