@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Sidebar 07</title>
+  	<title>Price Dropping</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -49,36 +49,34 @@
 
             {{ select3 }}
             
-            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
-
           </div>
         </nav>
-        <form class="metric" action="/metric" method="post">
-          <select class="form-select-metric" aria-label="Default select example" name="select1" required>
-              <option value="median_sale_price">Select metric type</option>
-              <option value="median_sale_price">Median sale Price</option>
-              <option value="months_of_supply">Months of supply</option>
-              <option value="total_new_listings">Total new listings</option>
-              <option value="pending_sales">Pending Sales</option>
-            </select>
-            <select aria-label="Default select example" name="select2" required>
-              <option value="county">Select region type county</option>
-              <option value="county">County</option>
-              <option value="metro">Metro</option>
-            </select>
-            <select aria-label="Default select example" name="select3" required>
-              <option value="Brevard County, FL">Select region name</option>
-              <option value="Brevard County, FL">Brevard County, FL</option>
-              <option value="Jefferson County, FL">Jefferson County, FL</option>
-            </select>
-            <button type="submit">search</button>
-      </form>
-      <div class="d-flex flex-row">
-        <canvas id="myChart" style="width:100%;max-width:700px" class="mt-5"></canvas>
-        <canvas id="pieChart" style="width:100%;max-width:700px" class="mt-5"></canvas>
-      </div>
+
+        <form class="price" action="/price" method="post">
+            <select class="form-select-metric" aria-label="Default select example" name="select1" required>
+                <option value="total_homes_sold_with_price_drops">Select Type</option>
+                <option value="price_drops">price_drops</option>
+                <option value="percent_total_price_drops_of_inventory">percent_total_price_drops_of_inventory</option>
+              </select>
+              <select aria-label="Default select example" name="select2" required>
+                <option value="county">Select region type county</option>
+                <option value="county">County</option>
+                <option value="metro">Metro</option>
+              </select>
+              <select aria-label="Default select example" name="select3" required>
+                <option value="Brevard County, FL">Select region name</option>
+                <option value="Brevard County, FL">Brevard County, FL</option>
+                <option value="Jefferson County, FL">Jefferson County, FL</option>
+              </select>
+              <button type="submit">search</button>
+        </form>
+        <div class="d-flex justify-content-center">
+            <canvas id="myChart" style="width:100%;max-width: 1000px;" class="mt-5"></canvas>
+        </div>
+        <div class="d-flex justify-content-center">
+          <canvas id="lineChart" style="width:100%;max-width: 1000px;" class="mt-5"></canvas>
+        </div>
+        
       </div>
 	</div>
     
@@ -91,8 +89,8 @@
     }
     return color;
     }
-    var barColors=[]
     var xValues="{{ x }}";
+    var barColors=[]
     xValues = xValues.split('[')[1].split(']')[0].split(',');
     for(var i=0;i<xValues.length;i++) {
       barColors[i]=getRandomColor()
@@ -108,12 +106,28 @@
     for(var i=0;i<yValues.length;i++) {
       yValues[i]=parseFloat(yValues[i])
     }
+
     console.log(xValues,yValues)
-    var minimum = Math.min(...yValues)
-    var maximum = Math.max(...yValues)
-    console.log(minimum,maximum)
+
 
     new Chart("myChart", {
+    type: "bar",
+    data: {
+        labels: xValues,
+        datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+        }]
+    },
+    options: {
+        legend: {display: false},
+        title: {
+        display: true,
+        }
+    }
+    });
+
+    new Chart("lineChart", {
       type: "line",
       data: {
         labels: xValues,
@@ -126,26 +140,14 @@
         }]
       },
       options: {
-        legend: {display: false},
+        legend: {display: false}
       }
     });
 
-    new Chart("pieChart", {
-  type: "pie",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues
-    }]
-  },
-  options: {
-    title: {
-      display: true,
-      text: "{{ select1 }}"
-    }
-  }
-});
+
+
+
+    
     </script>
   </body>
 </html>
