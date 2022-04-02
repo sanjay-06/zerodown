@@ -60,9 +60,9 @@
                     <option value="metro">Metro</option>
                   </select>
                   <select class="form-select-metric" aria-label="Default select example" name="select3" style="width: 400px;" required>
-                    <option value="Brevard County, FL">Select region name</option>
-                    <option value="Brevard County, FL">Brevard County, FL</option>
-                    <option value="Jefferson County, FL">Jefferson County, FL</option>
+                    {% for i in value %}
+                    <option value="{{i}}">{{ i }}</option>
+                    {% endfor %}
                   </select>
                   <button type="submit" class="btn btn-primary" style="height: 46px;">
                     <i class="fa fa-search"></i>

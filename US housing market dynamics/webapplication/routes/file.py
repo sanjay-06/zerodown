@@ -37,7 +37,11 @@ def chart(request: Request):
         q=str(aggregate['_id']['Quartile'])
         x.append(q)
         y.append(aggregate['metric_avg'])
-    return templates.TemplateResponse("index.html",{"request":request,"x":x,"y":y,"select1":select1,"select2":select2,"select3":select3})
+    metricaggregate=db.distinct("region_name")
+    value=[]
+    for met in metricaggregate:
+        value.append(met)
+    return templates.TemplateResponse("index.html",{"request":request,"x":x,"y":y,"select1":select1,"select2":select2,"select3":select3,"value":value})
 
 @dashboard.post("/metric")
 async def metric_name(request: Request,select1: str = Form(...),select2: str = Form(...),select3: str = Form(...)):
@@ -62,8 +66,11 @@ async def metric_name(request: Request,select1: str = Form(...),select2: str = F
         x.append(q)
         y.append(aggregate['metric_avg'])
     
-
-    return templates.TemplateResponse("index.html",{"request":request,"x":x,"y":y,"select1":select1,"select2":select2,"select3":select3})
+    metricaggregate=db.distinct("region_name")
+    value=[]
+    for met in metricaggregate:
+        value.append(met)
+    return templates.TemplateResponse("index.html",{"request":request,"x":x,"y":y,"select1":select1,"select2":select2,"select3":select3,"value":value})
     
 @dashboard.get("/price")
 async def metric_name(request: Request):
@@ -92,8 +99,11 @@ async def metric_name(request: Request):
         x.append(q)
         y.append(aggregate['price_avg'])
     
-   
-    return templates.TemplateResponse("pricing.html",{"request":request,"x":x,"y":y,"select1":select1,"select2":select2,"select3":select3})
+    metricaggregate=db.distinct("region_name")
+    value=[]
+    for met in metricaggregate:
+        value.append(met)
+    return templates.TemplateResponse("pricing.html",{"request":request,"x":x,"y":y,"select1":select1,"select2":select2,"select3":select3,"value":value})
 
 
 @dashboard.post("/price")
@@ -121,8 +131,12 @@ async def metric_name(request: Request,select1: str = Form(...),select2: str = F
         y.append(aggregate['metric_avg'])
     
   
+    metricaggregate=db.distinct("region_name")
+    value=[]
+    for met in metricaggregate:
+        value.append(met)
 
-    return templates.TemplateResponse("pricing.html",{"request":request,"x":x,"y":y,"select1":select1,"select2":select2,"select3":select3})
+    return templates.TemplateResponse("pricing.html",{"request":request,"x":x,"y":y,"select1":select1,"select2":select2,"select3":select3,"value":value})
 
 
 @dashboard.get("/allmetrics")
