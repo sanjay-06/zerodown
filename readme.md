@@ -2,8 +2,7 @@
 ## Question 3 : US housing market dynamics
 <br>
 The project is done with following technologies
-
-<br>
+<br><br>
 
 ```
 Cloud Platform - Microsoft Azure
