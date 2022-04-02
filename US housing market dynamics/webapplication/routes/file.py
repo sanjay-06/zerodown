@@ -39,7 +39,7 @@ def chart(request: Request):
         y.append(aggregate['metric_avg'])
     return templates.TemplateResponse("index.html",{"request":request,"x":x,"y":y,"select1":select1,"select2":select2,"select3":select3})
 
-@dashboard.post("/")
+@dashboard.post("/metric")
 async def metric_name(request: Request,select1: str = Form(...),select2: str = Form(...),select3: str = Form(...)):
     global dbs
     db = dbs["Metric_Analysis"]
@@ -127,3 +127,100 @@ async def metric_name(request: Request,select1: str = Form(...),select2: str = F
     print(y)
 
     return templates.TemplateResponse("pricing.html",{"request":request,"x":x,"y":y,"select1":select1,"select2":select2,"select3":select3})
+
+
+@dashboard.get("/allmetrics")
+async def metric_name(request: Request):
+    global dbs
+    db = dbs["Metric_Analysis"]
+    metricaggregate=db.aggregate([{
+    "$group" : 
+        {"_id" : {
+            "region_type": "$county",
+            "Quartile": "$Quartile",
+
+        }, 
+        
+         "metric_avg" : { "$avg" : "$total_new_listings" }
+         }},
+    ])
+    x=[]
+    y1=[]
+
+    for aggregate in metricaggregate:
+        q=str(aggregate['_id']['Quartile'])
+        x.append(q)
+        y1.append(aggregate['metric_avg'])
+    
+    metricaggregate=db.aggregate([{
+    "$group" : 
+        {"_id" : {
+            "region_type": "$metro",
+            "Quartile": "$Quartile",
+
+        }, 
+        
+         "metric_avg" : { "$avg" : "$total_new_listings" }
+         }},
+    ])
+
+
+    y2=[]
+    for aggregate in metricaggregate:
+        q=str(aggregate['_id']['Quartile'])
+        y2.append(aggregate['metric_avg'])
+    
+    print(x)
+    print(y1)
+    print(y2)
+
+    return templates.TemplateResponse("allmetrics.html",{"request":request,"x":x,"y1":y1,"y2":y2,"select1":"total_new_listings"})
+
+
+
+@dashboard.post("/allmetrics")
+async def metric_name(request: Request,select1: str = Form(...)):
+    global dbs
+    db = dbs["Metric_Analysis"]
+    metricaggregate=db.aggregate([{
+    "$group" : 
+        {"_id" : {
+            "region_type": "$county",
+            "Quartile": "$Quartile",
+
+        }, 
+        
+         "metric_avg" : { "$avg" : "$"+select1 }
+         }},
+    ])
+    x=[]
+    y1=[]
+
+    for aggregate in metricaggregate:
+        q=str(aggregate['_id']['Quartile'])
+        x.append(q)
+        y1.append(aggregate['metric_avg'])
+    
+    metricaggregate=db.aggregate([{
+    "$group" : 
+        {"_id" : {
+            "region_type": "$metro",
+            "Quartile": "$Quartile",
+
+        }, 
+        
+         "metric_avg" : { "$avg" : "$"+select1 }
+         }},
+    ])
+
+
+    y2=[]
+    for aggregate in metricaggregate:
+        q=str(aggregate['_id']['Quartile'])
+        y2.append(aggregate['metric_avg'])
+    
+    print(x)
+    print(y1)
+    print(y2)
+
+    return templates.TemplateResponse("allmetrics.html",{"request":request,"x":x,"y1":y1,"y2":y2,"select1":select1})

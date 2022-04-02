@@ -18,58 +18,55 @@
 		
 		<div class="wrapper d-flex align-items-stretch">
 			<nav id="sidebar" class="active">
-        <ul class="list-unstyled components mb-5 mt-5">
-          <li class="active mt-5">
-            <a href="/"><span class="fa fa-filter"></span>Metrics</a>
-          </li>
-          <li>
-              <a href="/price"><span class="fa fa-money"></span>Price</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-sticky-note"></span> Blog</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-cogs"></span> Services</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-paper-plane"></span> Contacts</a>
-          </li>
-        </ul>
+                <ul class="list-unstyled components mb-5 mt-5">
+                    <li class="active mt-5">
+                      <a href="/"><span class="fa fa-filter"></span>Metrics</a>
+                    </li>
+                    <li>
+                        <a href="/price"><span class="fa fa-money"></span>Price</a>
+                    </li>
+                    <li>
+                      <a href="/allmetrics"><span class="fa fa-compress"></span>Compare</a>
+                    </li>
+                  </ul>
     	</nav>
 
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
+        <nav class="container-md navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-md">
+  
+             <span class="font-weight-bold">Metric Type:</span> {{ select1 }}
+  
+             <span class="font-weight-bold">Region Type:</span> {{ select2 }}
+  
+             <span class="font-weight-bold">Region Name:</span> {{ select3 }}
+              
+            </div>
+          </nav>
 
-            {{ select1 }}
-
-            {{ select2 }}
-
-            {{ select3 }}
-            
-          </div>
-        </nav>
-
-        <form class="price" action="/price" method="post">
-            <select class="form-select-metric" aria-label="Default select example" name="select1" required>
-                <option value="total_homes_sold_with_price_drops">Select Type</option>
-                <option value="price_drops">price_drops</option>
-                <option value="percent_total_price_drops_of_inventory">percent_total_price_drops_of_inventory</option>
-              </select>
-              <select aria-label="Default select example" name="select2" required>
-                <option value="county">Select region type county</option>
-                <option value="county">County</option>
-                <option value="metro">Metro</option>
-              </select>
-              <select aria-label="Default select example" name="select3" required>
-                <option value="Brevard County, FL">Select region name</option>
-                <option value="Brevard County, FL">Brevard County, FL</option>
-                <option value="Jefferson County, FL">Jefferson County, FL</option>
-              </select>
-              <button type="submit">search</button>
-        </form>
+          <div class="d-flex justify-content-center">
+            <form class="price" action="/price" method="post">
+                <select class="form-select-metric" aria-label="Default select example" name="select1" required>
+                    <option value="total_homes_sold_with_price_drops">Select Type</option>
+                    <option value="price_drops">price_drops</option>
+                    <option value="percent_total_price_drops_of_inventory">percent_total_price_drops_of_inventory</option>
+                  </select>
+                  <select aria-label="Default select example" name="select2" required>
+                    <option value="county">Select region type county</option>
+                    <option value="county">County</option>
+                    <option value="metro">Metro</option>
+                  </select>
+                  <select aria-label="Default select example" name="select3" required>
+                    <option value="Brevard County, FL">Select region name</option>
+                    <option value="Brevard County, FL">Brevard County, FL</option>
+                    <option value="Jefferson County, FL">Jefferson County, FL</option>
+                  </select>
+                  <button type="submit">search</button>
+            </form>
+        </div>
+        
         <div class="d-flex justify-content-center">
             <canvas id="myChart" style="width:100%;max-width: 1000px;" class="mt-5"></canvas>
         </div>
@@ -120,11 +117,22 @@
         }]
     },
     options: {
-        legend: {display: false},
-        title: {
+    legend: {display: false},
+    scales: {
+    xAxes: [{
+      scaleLabel: {
         display: true,
-        }
-    }
+        labelString: "Quarterly Timeline"
+      }
+    }],
+    yAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: "{{ select1 }}"
+      }
+    }]
+  }     
+  }
     });
 
     new Chart("lineChart", {
@@ -140,8 +148,22 @@
         }]
       },
       options: {
-        legend: {display: false}
+    legend: {display: false},
+    scales: {
+    xAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: "Quarterly Timeline"
       }
+    }],
+    yAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: "{{ select1 }}"
+      }
+    }]
+  }     
+  }
     });
 
 

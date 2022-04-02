@@ -26,55 +26,50 @@
               <a href="/price"><span class="fa fa-money"></span>Price</a>
           </li>
           <li>
-            <a href="#"><span class="fa fa-sticky-note"></span> Blog</a>
+            <a href="/allmetrics"><span class="fa fa-compress"></span>Compare</a>
           </li>
-          <li>
-            <a href="#"><span class="fa fa-cogs"></span> Services</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-paper-plane"></span> Contacts</a>
-          </li>
+         
         </ul>
     	</nav>
 
         <!-- Page Content  -->
       <div id="content" class="p-4 p-md-5">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
 
-            {{ select1 }}
+        <nav class="container-md navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-md">
 
-            {{ select2 }}
+           <span class="font-weight-bold">Metric Type:</span> {{ select1 }}
 
-            {{ select3 }}
+           <span class="font-weight-bold">Region Type:</span> {{ select2 }}
+
+           <span class="font-weight-bold">Region Name:</span> {{ select3 }}
             
-            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
-
           </div>
         </nav>
-        <form class="metric" action="/metric" method="post">
-          <select class="form-select-metric" aria-label="Default select example" name="select1" required>
-              <option value="median_sale_price">Select metric type</option>
-              <option value="median_sale_price">Median sale Price</option>
-              <option value="months_of_supply">Months of supply</option>
-              <option value="total_new_listings">Total new listings</option>
-              <option value="pending_sales">Pending Sales</option>
-            </select>
-            <select aria-label="Default select example" name="select2" required>
-              <option value="county">Select region type county</option>
-              <option value="county">County</option>
-              <option value="metro">Metro</option>
-            </select>
-            <select aria-label="Default select example" name="select3" required>
-              <option value="Brevard County, FL">Select region name</option>
-              <option value="Brevard County, FL">Brevard County, FL</option>
-              <option value="Jefferson County, FL">Jefferson County, FL</option>
-            </select>
-            <button type="submit">search</button>
-      </form>
+        <div class="d-flex justify-content-center">
+          <form class="metric" action="/metric" method="post">
+            <select class="form-select-metric" aria-label="Default select example" name="select1" required>
+                <option value="median_sale_price">Select metric type</option>
+                <option value="median_sale_price">Median sale Price</option>
+                <option value="months_of_supply">Months of supply</option>
+                <option value="total_new_listings">Total new listings</option>
+                <option value="pending_sales">Pending Sales</option>
+              </select>
+              <select aria-label="Default select example" name="select2" required>
+                <option value="county">Select region type county</option>
+                <option value="county">County</option>
+                <option value="metro">Metro</option>
+              </select>
+              <select aria-label="Default select example" name="select3" required>
+                <option value="Brevard County, FL">Select region name</option>
+                <option value="Brevard County, FL">Brevard County, FL</option>
+                <option value="Jefferson County, FL">Jefferson County, FL</option>
+              </select>
+              <button type="submit">search</button>
+        </form>
+        </div>
+       
       <div class="d-flex flex-row">
         <canvas id="myChart" style="width:100%;max-width:700px" class="mt-5"></canvas>
         <canvas id="pieChart" style="width:100%;max-width:700px" class="mt-5"></canvas>
@@ -126,7 +121,23 @@
         }]
       },
       options: {
-        legend: {display: false},
+    legend: {display: false},
+    scales: {
+    xAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: "Quarterly Timeline"
+      }
+    }],
+    yAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: "{{ select1 }}"
+      }
+    }]
+  },
+
+  legend: {display: false},
       }
     });
 

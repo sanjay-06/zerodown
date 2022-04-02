@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Sidebar 07</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', path='css/bootstrap.min.css') }}">
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar" class="active">
+        <ul class="list-unstyled components mb-5 mt-5">
+          <li class="active mt-5">
+            <a href="/"><span class="fa fa-filter"></span>Metrics</a>
+          </li>
+          <li>
+              <a href="/price"><span class="fa fa-money"></span>Price</a>
+          </li>
+          <li>
+            <a href="/allmetrics"><span class="fa fa-compress"></span>Compare</a>
+          </li>
+         
+        </ul>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+
+        <nav class="d-flex flex-row navbar navbar-light bg-light">
+          <span class="font-weight-bold">Metric Type</span> 
+          <div class="container-fluid">
+
+            {{ select1 }}
+
+          </div>
+        </nav>
+        <form class="metric" action="/allmetrics" method="post">
+          <select class="form-select-metric" aria-label="Default select example" name="select1" required>
+              <option value="median_sale_price">Select metric type</option>
+              <option value="median_sale_price">Median sale Price</option>
+              <option value="months_of_supply">Months of supply</option>
+              <option value="total_new_listings">Total new listings</option>
+              <option value="pending_sales">Pending Sales</option>
+            </select>
+            <button type="submit">search</button>
+      </form>
+      <div class="d-flex justify-content-center">
+        <canvas id="myChart" style="width:100%;max-width:1000px" class="mt-5"></canvas>
+      </div>
+      </div>
+	</div>
+    
+  <script>
+    var xValues="{{ x }}";
+    xValues = xValues.split('[')[1].split(']')[0].split(',');
+    for(var i=0;i<xValues.length;i++) {
+      if(i==0)
+        xValues[i]=xValues[i].slice(5,12)
+      else
+        xValues[i]=xValues[i].slice(6,13)
+    }
+
+    var y1 = "{{ y1 }}";
+    y1 = y1.split('[')[1].split(']')[0].split(',');
+
+    for(var i=0;i<y1.length;i++) {
+      y1[i]=parseFloat(y1[i])
+    }
+
+    var y2 = "{{ y2 }}";
+    y2 = y2.split('[')[1].split(']')[0].split(',');
+
+    for(var i=0;i<y2.length;i++) {
+      y2[i]=parseFloat(y2[i])
+    }
+
+    console.log(xValues,y1,y2)
+    new Chart("myChart", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{ 
+      label: 'County',
+      data: y1,
+      borderColor: "red",
+      fill: false
+    },{
+      label: 'Metro', 
+      data: y2,
+      borderColor: "blue",
+      fill: false
+    }]
+  },
+  options: {
+    legend: {display: true},
+    scales: {
+    xAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: "Quarterly Timeline"
+      }
+    }],
+    yAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: "{{ select1 }}"
+      }
+    }]
+  }     
+  }
+});
+    </script>
+  </body>
+</html>
