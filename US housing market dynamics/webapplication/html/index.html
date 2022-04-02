@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Sidebar 07</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', path='css/bootstrap.min.css') }}">
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar" class="active">
+        <ul class="list-unstyled components mb-5 mt-5">
+          <li class="active mt-5">
+            <a href="#"><span class="fa fa-home"></span> Home</a>
+          </li>
+          <li>
+              <a href="#"><span class="fa fa-user"></span> About</a>
+          </li>
+          <li>
+            <a href="#"><span class="fa fa-sticky-note"></span> Blog</a>
+          </li>
+          <li>
+            <a href="#"><span class="fa fa-cogs"></span> Services</a>
+          </li>
+          <li>
+            <a href="#"><span class="fa fa-paper-plane"></span> Contacts</a>
+          </li>
+        </ul>
+
+        <div class="footer">
+        	<p>
+					  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+					</p>
+        </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+
+            
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+
+          </div>
+        </nav>
+
+        <div>
+            sha
+            {{ data }}
+        </div>
+
+        <form class="metric" action="/metric" method="post">
+            <select class="form-select-metric" aria-label="Default select example" name="select">
+                <option selected>Metric</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+              <button type="submit">search</button>
+        </form>
+        
+        <form class="region" action="/region" method="post">
+            <select class="form-select-metric" aria-label="Default select example" name="select2">
+                <option selected>Region</option>
+                <option value="11">One</option>
+                <option value="21">Two</option>
+                <option value="31">Three</option>
+              </select>
+              <button type="submit">search</button>
+        </form>
+      </div>
+	</div>
+    
+   <!-- <script>
+       $(document).ready(function(){
+           console.log("came")
+
+        
+  $("form.metric").change(function(e){
+
+    e.preventDefault()
+    url="/metric",
+    type="post",
+    $.ajax({
+        url:url,
+        type:type,
+        success:function(response){
+            alert("came")
+            // alert(response.statuscode)
+            
+        }
+    })
+  });
+});
+
+   </script> -->
+  </body>
+</html>
