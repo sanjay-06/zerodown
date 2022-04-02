@@ -62,8 +62,6 @@ async def metric_name(request: Request,select1: str = Form(...),select2: str = F
         x.append(q)
         y.append(aggregate['metric_avg'])
     
-    print(x)
-    print(y)
 
     return templates.TemplateResponse("index.html",{"request":request,"x":x,"y":y,"select1":select1,"select2":select2,"select3":select3})
     
@@ -94,8 +92,7 @@ async def metric_name(request: Request):
         x.append(q)
         y.append(aggregate['price_avg'])
     
-    print(x)
-    print(y)
+   
     return templates.TemplateResponse("pricing.html",{"request":request,"x":x,"y":y,"select1":select1,"select2":select2,"select3":select3})
 
 
@@ -123,8 +120,7 @@ async def metric_name(request: Request,select1: str = Form(...),select2: str = F
         x.append(q)
         y.append(aggregate['metric_avg'])
     
-    print(x)
-    print(y)
+  
 
     return templates.TemplateResponse("pricing.html",{"request":request,"x":x,"y":y,"select1":select1,"select2":select2,"select3":select3})
 
@@ -170,10 +166,7 @@ async def metric_name(request: Request):
         q=str(aggregate['_id']['Quartile'])
         y2.append(aggregate['metric_avg'])
     
-    print(x)
-    print(y1)
-    print(y2)
-
+   
     return templates.TemplateResponse("allmetrics.html",{"request":request,"x":x,"y1":y1,"y2":y2,"select1":"total_new_listings"})
 
 
@@ -219,8 +212,6 @@ async def metric_name(request: Request,select1: str = Form(...)):
         q=str(aggregate['_id']['Quartile'])
         y2.append(aggregate['metric_avg'])
     
-    print(x)
-    print(y1)
-    print(y2)
+  
 
     return templates.TemplateResponse("allmetrics.html",{"request":request,"x":x,"y1":y1,"y2":y2,"select1":select1})

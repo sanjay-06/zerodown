@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+		<link rel="stylesheet" href="static/style.css">
+		<link rel="stylesheet" href="static/bootstrap.min.css">
+
 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     </head>
@@ -47,22 +49,24 @@
 
           <div class="d-flex justify-content-center">
             <form class="price" action="/price" method="post">
-                <select class="form-select-metric" aria-label="Default select example" name="select1" required>
+                <select class="form-select-metric" aria-label="Default select example" name="select1" style="width: 400px;" required>
                     <option value="total_homes_sold_with_price_drops">Select Type</option>
                     <option value="price_drops">price_drops</option>
                     <option value="percent_total_price_drops_of_inventory">percent_total_price_drops_of_inventory</option>
                   </select>
-                  <select aria-label="Default select example" name="select2" required>
+                  <select class="form-select-metric" aria-label="Default select example" name="select2" style="width: 400px;" required>
                     <option value="county">Select region type county</option>
                     <option value="county">County</option>
                     <option value="metro">Metro</option>
                   </select>
-                  <select aria-label="Default select example" name="select3" required>
+                  <select class="form-select-metric" aria-label="Default select example" name="select3" style="width: 400px;" required>
                     <option value="Brevard County, FL">Select region name</option>
                     <option value="Brevard County, FL">Brevard County, FL</option>
                     <option value="Jefferson County, FL">Jefferson County, FL</option>
                   </select>
-                  <button type="submit">search</button>
+                  <button type="submit" class="btn btn-primary" style="height: 46px;">
+                    <i class="fa fa-search"></i>
+                  </button>
             </form>
         </div>
         

@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+		<link rel="stylesheet" href="static/style.css">
+		<link rel="stylesheet" href="static/bootstrap.min.css">
+
 
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     </head>
@@ -42,16 +44,20 @@
 
           </div>
         </nav>
-        <form class="metric" action="/allmetrics" method="post">
-          <select class="form-select-metric" aria-label="Default select example" name="select1" required>
-              <option value="median_sale_price">Select metric type</option>
-              <option value="median_sale_price">Median sale Price</option>
-              <option value="months_of_supply">Months of supply</option>
-              <option value="total_new_listings">Total new listings</option>
-              <option value="pending_sales">Pending Sales</option>
-            </select>
-            <button type="submit">search</button>
-      </form>
+
+            <form class="metric d-flex flex-row" action="/allmetrics" method="post">
+                <select class="form-select-metric" aria-label="Default select example" name="select1" style="width: 90%;" required>
+                    <option value="median_sale_price">Select metric type</option>
+                    <option value="median_sale_price">Median sale Price</option>
+                    <option value="months_of_supply">Months of supply</option>
+                    <option value="total_new_listings">Total new listings</option>
+                    <option value="pending_sales">Pending Sales</option>
+                  </select>&nbsp;
+                  <button type="submit" class="btn btn-primary" style="height: 46px;">
+                    <i class="fa fa-search"></i>
+                  </button>
+            </form>
+        
       <div class="d-flex justify-content-center">
         <canvas id="myChart" style="width:100%;max-width:1000px" class="mt-5"></canvas>
       </div>
