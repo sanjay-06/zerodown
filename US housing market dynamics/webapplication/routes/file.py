@@ -1,9 +1,7 @@
 
-from ast import For
 from fastapi import APIRouter,Request,Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
-from typing import List
 
 dashboard=APIRouter()
 templates=Jinja2Templates(directory="html")
