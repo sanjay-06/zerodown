@@ -89,7 +89,7 @@ Install required Modules
      pip install -r requirements.txt
 ```
 
-Navigate to the folder
+Navigate to the Project folder (Question 3)
 
 ```
 cd "US housing market dynamics"/webapplication
