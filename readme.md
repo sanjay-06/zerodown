@@ -114,7 +114,27 @@ cd "US housing market dynamics"/webapplication
 ## Question 2 : Natural Hazards
 
 
-shapefile loading done with creating pandas dataframe
+Shapefile loading done with creating pandas dataframe
+
+<br>
+
+## Package Usage
+
+<br>
+
+```
+Data loading done with hurricane.ipynb notebook
+```
+
+
+## Folder Structure
+
+```
+Natural Hazards
+|__hurricane.ipynb
+```
+
+
 
 
 
