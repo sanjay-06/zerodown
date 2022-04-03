@@ -70,6 +70,47 @@ comparison for each metric in case of county & metro
 
 <br>
 
+# Package Usage
+
+## Quick start
+
+<br>
+
+clone the repository
+
+    git clone https://github.com/sanjay-06/zerodown
+
+    cd zerodown
+      
+
+Install required Modules
+
+```
+     pip install -r requirements.txt
+```
+
+Navigate to the folder
+
+```
+cd "US housing market dynamics"/webapplication
+
+```
+  
+
+#### Start the server
+      
+      python main.py
+
+## View in browser
+
+
+<a href="http://localhost:8000/">http://localhost:8000/</a>
+
+
+
+
+<br>
+
 ## Question 2 : Natural Hazards
 
 
